@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "myof"
+version = "0.1.0"
+description = "My Open Finance is a simple and easy to use API to get information about your financial life."
+authors = ["Antônio Carlos de Nazaré Júnior <acnazarejr@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/acnazarejr/myof"
+keywords = ["open-finance", "finance", "transactions", "banking", "investments"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Typing :: Typed",
+]
+packages = [{include = "myof", from = "src"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.3.3"
+isort = "^5.12.0"
+black = "^23.3.0"
+ruff = "^0.0.277"
+pyright = "^1.1.316"
+poetry-dotenv-plugin = "^0.1.0"
+
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+exclude = [".venv"]
+line-length = 120
+target-version = "py311"
+select = [
+    "E", "F", "I", "N", "D", "UP", "S", "B", "A", "C4", "DTZ", "ICN", "G", "PIE", "T20", "RET",
+    "SLF", "SIM", "TCH", "ARG", "TD", "FIX", "PD",
+]
+ignore = ["D202", "PD010", "PD012"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.pyright]
+include = ["src"]
+venvPath = "."
+venv = ".venv"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,39 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    - id: trailing-whitespace # Remove espaços em branco no final das linhas
+    - id: end-of-file-fixer # Adiciona uma linha em branco no final do arquivo
+    - id: check-yaml # Verifica se o arquivo YAML é válido
+    - id: check-added-large-files # Verifica se os arquivos adicionados são muito grande
+      args: [--maxkb=500]
+
+  # Garante que os arquivos python estão formatados corretamente
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+    - id: black
+      language_version: python3.10
+
+  # Executa o ruff para verificar se o código está de acordo com o padrão, e corrige os erros que
+  # são passíveis de correção.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.277
+    hooks:
+      - id: ruff
+        args: [--fix, --show-fixes]
+
+  # Executa o pyright para garantir o tipo das variáveis
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.316
+    hooks:
+    - id: pyright
+
+  # Executa o markdownlint para garantir que os arquivos markdown estão formatados corretamente.
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.35.0
+    hooks:
+    - id: markdownlint
