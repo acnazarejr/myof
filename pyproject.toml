@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "myof"
+name = "mypluggy"
 version = "0.1.0"
-description = "My Open Finance is a simple and easy to use API to get information about your financial life."
+description = "MyPluggy is a simple and easy to use API to get information about your financial life from MeuPluggy."
 authors = ["Antônio Carlos de Nazaré Júnior <acnazarejr@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/acnazarejr/myof"
+repository = "https://github.com/acnazarejr/mypluggy"
 keywords = ["open-finance", "finance", "transactions", "banking", "investments"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -24,20 +24,30 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Typing :: Typed",
 ]
-packages = [{include = "myof", from = "src"}]
+packages = [{include = "mypluggy", from = "src"}]
 
+[tool.poetry.scripts]
+mypluggy = "mypluggy.cli.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+click = "^8.1.7"
+pydantic = "^2.6.3"
 requests = "^2.31.0"
 
+
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.3.3"
-isort = "^5.12.0"
 black = "^23.3.0"
-ruff = "^0.0.277"
-pyright = "^1.1.316"
+isort = "^5.12.0"
 poetry-dotenv-plugin = "^0.1.0"
+pre-commit = "^3.3.3"
+pyright = "^1.1.316"
+ruff = "^0.0.277"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.0.2"
+pytest-cov = "^4.1.0"
 
 [tool.black]
 line-length = 120
@@ -62,12 +72,15 @@ profile = "black"
 [tool.ruff]
 exclude = [".venv"]
 line-length = 120
-target-version = "py311"
+target-version = "py310"
 select = [
     "E", "F", "I", "N", "D", "UP", "S", "B", "A", "C4", "DTZ", "ICN", "G", "PIE", "T20", "RET",
     "SLF", "SIM", "TCH", "ARG", "TD", "FIX", "PD",
 ]
 ignore = ["D202", "PD010", "PD012"]
+
+[tool.ruff.per-file-ignores]
+"**/{tests}/*" = ["S101"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
